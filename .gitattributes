@@ -1,0 +1,84 @@
+*.bat text working-tree-encoding=GBK eol=crlf
+*.py text eol=lf
+*.go text eol=lf
+*.rs text eol=lf
+*.java text eol=lf
+*.ps1 text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.cmake text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.proto text eol=lf
+.githooks/* text eol=lf
+
+# ============================================================
+# export-ignore: go 模块发布出口
+# go 模块 (github.com/quant1x/mopr) 经 git archive / go module proxy
+# 分发时只携带 Go 源码与合规物 (THIRD_PARTY_NOTICES.md +
+# third_party/licenses/go/ 归档, 与 MANIFEST.in / Cargo include 的
+# "各语言许可证归档仅随各自语言产物分发" 策略一致)。
+# 以下为其它语言源码、构建产物与辅助文件, 一律不进 go module zip。
+# 语法注意: 注释(#)行不生效; export-ignore 必须显式写在 attribute 位;
+#           目录排除须写 dir/** 才能递归覆盖目录内文件。
+# ============================================================
+
+# --- Rust (lib.rs/main.rs 已含于 *.rs) ---
+*.rs export-ignore
+Cargo.toml export-ignore
+Cargo.lock export-ignore
+rust-toolchain.toml export-ignore
+/target/** export-ignore
+
+# --- C/C++ (本仓 C++ 库 mopr_core 与其 conan 构建链) ---
+*.c export-ignore
+*.cc export-ignore
+*.cpp export-ignore
+*.h export-ignore
+*.hpp export-ignore
+*.o export-ignore
+*.obj export-ignore
+*.out export-ignore
+*.a export-ignore
+*.lib export-ignore
+*.so export-ignore
+*.dll export-ignore
+*.dylib export-ignore
+CMakeLists.txt export-ignore
+CMakePresets.json export-ignore
+*.cmake export-ignore
+/cmake/** export-ignore
+ninja-toolchain.cmake export-ignore
+conanfile.py export-ignore
+/build/** export-ignore
+
+# --- Python (python/ 包与 tools/ 工具集) ---
+/python/** export-ignore
+/tools/** export-ignore
+*.py export-ignore
+*.pyc export-ignore
+**/__pycache__/** export-ignore
+**/*.egg-info/** export-ignore
+/mopr.egg-info/** export-ignore
+pyproject.toml export-ignore
+MANIFEST.in export-ignore
+
+# --- Java ---
+pom.xml export-ignore
+
+# --- 前端示例 (JS/Vite) ---
+/demo/** export-ignore
+
+# --- 第三方许可证归档: 仅 go/ 归档随 go module zip 分发 ---
+# 白名单式(后写优先): 先整体忽略 third_party/licenses/**, 再对 go/**
+# unset; 今后无论新增 python/java/... 归档目录均自动被忽略, 无需改此处。
+/third_party/licenses/** export-ignore
+/third_party/licenses/go/** -export-ignore
+
+# --- 发布与辅助脚本 ---
+*.bat export-ignore
+*.ps1 export-ignore
+*.sh export-ignore
